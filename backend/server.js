@@ -6,6 +6,8 @@ import connectDb from './config/mongoConnection.js';
 import authRouter from './routes/auth.route.js';
 import reportRouter from './routes/report.route.js';
 import adminRouter from './routes/admin.route.js';
+import protectRoute from './middleware/protectRoute.js';
+import protectRouteAdmin from './middleware/protectRouteAdmin.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,8 +17,8 @@ app.use(express.json());
 // app.use(core())
 
 app.use('/auth/', authRouter);
-app.use('/reports/', reportRouter);
-app.use('/admin/users', adminRouter);
+app.use('/reports/', protectRoute, reportRouter);
+app.use('/admin/users', protectRouteAdmin, adminRouter);
 
 app.listen(PORT ,() => {
     connectDb();
