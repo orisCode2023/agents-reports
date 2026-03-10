@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.use('/auth/', authRouter);
 app.use('/reports/', protectRoute, reportRouter);
-app.use('/admin/users', protectRouteAdmin, adminRouter);
+app.use('/admin/users', adminRouter);
 
 app.listen(PORT ,() => {
     connectDb();

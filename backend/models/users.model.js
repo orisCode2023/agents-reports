@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    id: {
-        type: String,
-        require: true
-    },
     agentCode: {
         type: String,
         require: true
@@ -20,10 +16,6 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         enum: ['admin', 'agent'],
-        require: true
-    },
-    createdAt: {
-        type: String,
         require: true
     }
 }, {timestamps: true}
