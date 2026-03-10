@@ -20,9 +20,9 @@ app.use(cookieParser());
 // app.use(core())
 
 app.use('/auth/', authRouter);
-app.use('/reports/', reportRouter);
+// app.use('/reports/', reportRouter);
 app.use('/admin/users', adminRouter);
-// app.use('/reports/', protectRoute, reportRouter);
+app.use('/reports/', protectRoute, reportRouter);
 // app.use('/admin/users', protectRouteAdmin, adminRouter);
 
 app.listen(PORT ,() => {

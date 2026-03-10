@@ -1,31 +1,7 @@
 import mongoose from "mongoose";
 
 const reportSchema = new mongoose.Schema({
-    id: {
-        type: String,
-        require: true
-    },
     userId: {
-        type: String,
-        require: true
-    },
-    catagory: {
-        type: String,
-        require: true
-    },
-    urgency: {
-        type: String,
-        require: true
-    },
-    message: {
-        type: String,
-        require: true
-    },
-    imagePath: {
-        type: String,
-        require: true
-    },
-    sourceType: {
         type: String,
         require: true
     },
@@ -39,7 +15,15 @@ const reportSchema = new mongoose.Schema({
         enum: ["low", "medium", "high"],
         require: true
     },
-    createdAt: {
+    message: {
+        type: String,
+        require: true
+    },
+    imagePath: {
+        type: String,
+        require: true
+    },
+    sourceType: {
         type: String,
         require: true
     }
