@@ -3,16 +3,21 @@ import Report from "../../models/reports.model.js";
 async function getReports(req, res){
     try {
         const user = req.user;
-        const param = req.param;
+        const {query} = req.query;
+        const query1 = req.query;
+        console.log(user)
+        console.log(query)
+        console.log(query1)
         let reports;
 
         if(user.role === 'admin'){
-            reports = await Report.find(param);
+            reports = await Report.find(query1);
 
-        } else if (user.role === 'agent') {
+        } 
+        if (user.role === 'agent') {
             reports = await Report.find({
-                param,
-                userId: user.id
+                query1
+                // userId: user._id
             })
         }
         if(!reports) {
