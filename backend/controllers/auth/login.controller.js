@@ -1,26 +1,104 @@
 import User from "../../models/users.model.js";
-import generateTokenAndSetCookie from "../../utils/genrateToken.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-async function login(req, res){
-    try {
-    const {agentCode, password} = req.body;
+async function login(req, res) {
+  try {
+    const { agentCode, password } = req.body;
 
-    if (!agentCode || !password) res.status(400).json({message: "agent code or password was missing"});
+    if (!agentCode || !password)
+      return res
+        .status(400)
+        .json({ message: "agent code or password was missing" });
 
-    const user = await User.findOne({agentCode: agentCode})
-    if (!user) res.status(401).json({message: `user with ${agentCode} not found`});
+    const user = await User.findOne({ agentCode: agentCode });
+    console.log(user);
+    if (!user)
+      return res
+        .status(401)
+        .json({ message: `user with ${agentCode} not found` });
 
-    if (user && user.passwordHash !== password){
-        return res.status(401).json({message: `password ${password} dose not match`});
-    } else {
-        const token = generateTokenAndSetCookie(user.id, res);
-        res.status(200).json({message: 'login successfully', token: token,
-        user: {id: user.id, agentCode: agentCode, name: user.fullName, role: user.role}})
-    }
+    const isMatch = await bcrypt.compare(password, user.passwordHash);
 
-    } catch (error) {
-        console.log('Error in login controller', error.message);
-        req.status(500).json({message: 'Internal server error '});
-    }
+    if (!isMatch)
+      return res.status(401).json({ message: `password does not match` });
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "15d",
+    });
+
+    res
+      .cookie("jwt", token, {
+        maxAge: 15 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        sameSite: "strict",
+      })
+      .status(200)
+      .json({
+        message: "login successfully",
+        user: {
+          id: user.id,
+          agentCode: agentCode,
+          name: user.fullName,
+          role: user.role,
+        },
+      });
+  } catch (error) {
+    console.log("Error in login controller", error.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
 }
-export default login
+
+export default login;
+
+// import User from "../../models/users.model.js";
+// // import generateTokenAndSetCookie from "../../utils/genrateToken.js";
+// import bcrypt from "bcrypt";
+// import jwt from "jsonwebtoken";
+
+// async function login(req, res) {
+//   try {
+//     const { agentCode, password } = req.body;
+
+//     if (!agentCode || !password){
+//         return res.status(400).json({ message: "agent code or password was missing" });
+//     }
+
+//     const user = await User.findOne({ agentCode: agentCode });
+//     if (!user) {
+//         return res.status(401).json({ message: `user with ${agentCode} not found` });
+//     }
+
+//     const isMatch = await bcrypt.compare(password, user.passwordHash);
+//     if (!isMatch) {
+//       return res
+//         .status(401)
+//         .json({ message: `password ${password} dose not match` });
+//     }
+//     // generateTokenAndSetCookie(user._id, res);
+//     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+//       expiresIn: "15d",
+//     });
+
+//     res
+//       .cookie("jwt", token, {
+//         maxAge: 15 * 24 * 60 * 60 * 1000,
+//         httpOnly: true,
+//         sameSite: "strict",
+//       })
+//       .status(200)
+//       .json({
+//         message: "login successfully",
+//         user: {
+//           id: user.id,
+//           agentCode: agentCode,
+//           name: user.fullName,
+//           role: user.role,
+//         },
+//       });
+//   } catch (error) {
+//     console.log("Error in login controller", error.message);
+//     res.status(500).json({ message: "Internal server error " });
+//   }
+// }
+// export default login;

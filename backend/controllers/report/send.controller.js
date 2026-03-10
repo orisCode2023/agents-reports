@@ -3,7 +3,7 @@ async function sendReport(req, res){
         
     } catch (error) {
         console.log('Error in send report controller', error.message);
-        req.status(500).json({message: 'Internal server error '});
+        res.status(500).json({message: 'Internal server error '});
     }
 }
 export default sendReport;

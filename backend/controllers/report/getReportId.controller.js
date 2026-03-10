@@ -3,7 +3,7 @@ async function getReportId(req, res){
         
     } catch (error) {
         console.log('Error in get report by id controller', error.message);
-        req.status(500).json({message: 'Internal server error '});
+        res.status(500).json({message: 'Internal server error '});
     }
 }
 export default getReportId;
