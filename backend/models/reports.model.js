@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const reportSchema = new mongoose.Schema({
     userId: {
         type: String,
-        require: true
+        require: true, 
     },
     catagory: {
         type: String,
@@ -28,6 +28,7 @@ const reportSchema = new mongoose.Schema({
         require: true
     }
 }, {timestamps: true}
+// }, {timestamps: true, strict: false}
 );
 
 const Report = mongoose.model("Report", reportSchema);

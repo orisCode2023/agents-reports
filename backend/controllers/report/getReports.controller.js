@@ -1,15 +1,5 @@
 import Report from "../../models/reports.model.js";
 
-
-// function filterArray(reports, query){
-//     const keysQuery = Object.keys(query);
-//     const filterQuery = reports.filter((report) => {
-//         keysQuery.map(k => {
-//         report[k] === query[k]
-//         })
-//     });
-//     return filterQuery
-// }
 async function getReports(req, res){
     try {
         const {role, id} = req.user;
