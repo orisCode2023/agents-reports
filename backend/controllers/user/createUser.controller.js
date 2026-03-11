@@ -16,7 +16,7 @@ async function createUsers(req, res) {
     }
     const isExist = await User.findOne({ agentCode: agentCode });
     if (isExist) {
-      res.status(409).json({ message: `user with ${agentCode} already exist` });
+      return res.status(409).json({ message: `user with ${agentCode} already exist` });
     }
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(agentCode, salt);
@@ -27,10 +27,10 @@ async function createUsers(req, res) {
       role,
     });
 
-    res.status(201).json({ message: "agent created", agent: newUser });
+    return res.status(201).json({ message: "agent created", agent: newUser });
   } catch (error) {
     console.log("Error in create user controller", error.message);
-    res.status(500).json({ message: "Internal server error " });
+    return res.status(500).json({ message: "Internal server error " });
   }
 }
 export default createUsers;

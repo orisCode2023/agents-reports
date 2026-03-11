@@ -3,7 +3,7 @@ import upload from "../../services/uplaodFile.service.js";
 
 async function sendReport(req, res){
     try {
-        const {catagory, urgancy, message} = req.body;
+        const { catagory, urgancy, message } = req.body;
         const imagePath = req.file ? req.file.path : null;
         const userId = req.user.id;
 
@@ -22,10 +22,10 @@ async function sendReport(req, res){
             imagePath,
             sourceType: 'manual'
         })
-        res.status(201).json({message: 'report successfully', report: newReport})
+        return res.status(201).json({message: 'report successfully', report: newReport})
     } catch (error) {
         console.log('Error in send report controller', error.message);
-        res.status(500).json({message: 'Internal server error '});
+        return res.status(500).json({message: 'Internal server error '});
     }
 }
 export default sendReport;
