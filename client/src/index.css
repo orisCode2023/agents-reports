@@ -1,0 +1,231 @@
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  line-height: 1.5;
+  color: #1a1a1a;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar (first content div under React root) */
+#root > div > div:first-of-type {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: #2c3e50;
+  color: #fff;
+  flex-wrap: wrap;
+}
+
+#root > div > div:first-of-type a {
+  color: #ecf0f1;
+  text-decoration: none;
+}
+
+#root > div > div:first-of-type a:hover {
+  text-decoration: underline;
+}
+
+/* Main content (page area) */
+#root > div > div:last-of-type {
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 56rem;
+  margin: 0 auto;
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+p {
+  margin: 0.5rem 0;
+}
+
+/* Links (including React Router Link) */
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Forms */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 28rem;
+  margin-top: 1rem;
+}
+
+label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+}
+
+input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+input::placeholder {
+  color: #999;
+}
+
+/* Buttons */
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  background: #3498db;
+  color: #fff;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+button:hover {
+  background: #2980b9;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.9375rem;
+}
+
+thead {
+  background: #34495e;
+  color: #fff;
+}
+
+th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background: #f8f9fa;
+}
+
+tbody tr:hover {
+  background: #e8f4fc;
+}
+
+td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Search / filters row (div with label + input + button) */
+div > div:has(label):has(input):has(button) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+}
+
+div > div:has(label):has(input):has(button) label {
+  margin-bottom: 0;
+}
+
+div > div:has(label):has(input):has(button) input {
+  width: auto;
+  min-width: 10rem;
+}
+
+/* Home page links */
+#root > div > div:last-of-type > div > div:first-child {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+#root > div > div:last-of-type > div > div:first-child a {
+  padding: 0.5rem 1rem;
+  background: #3498db;
+  color: #fff;
+  border-radius: 6px;
+}
+
+#root > div > div:last-of-type > div > div:first-child a:hover {
+  background: #2980b9;
+  text-decoration: none;
+}
+
+/* Dashboard link groups */
+#root > div > div:last-of-type > div > div {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+#root > div > div:last-of-type > div > div a {
+  padding: 0.4rem 0.85rem;
+  background: #ecf0f1;
+  color: #2c3e50;
+  border-radius: 6px;
+}
+
+#root > div > div:last-of-type > div > div a:hover {
+  background: #bdc3c7;
+  text-decoration: none;
+}

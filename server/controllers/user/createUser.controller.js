@@ -27,7 +27,7 @@ async function createUsers(req, res) {
       role,
     });
 
-    return res.status(201).json({ message: "agent created", agent: newUser });
+    return res.status(201).json({ message: "agent created", data: newUser });
   } catch (error) {
     console.log("Error in create user controller", error.message);
     return res.status(500).json({ message: "Internal server error " });

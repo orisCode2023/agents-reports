@@ -26,7 +26,7 @@ async function getReports(req, res) {
 
     return res
       .status(200)
-      .json({ message: "reports was found", Report: reports });
+      .json({ message: "reports was found", data: reports });
   } catch (error) {
     console.log("Error in get reports controller", error.message);
     return res.status(500).json({ message: "Internal server error" });

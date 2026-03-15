@@ -6,7 +6,7 @@ async function getMe(req, res){
         if (!user){
             return res.status(401).json({message: 'user not found'})
         }
-        return res.status(200).json({message:'get user info succrssfully', user: user})
+        return res.status(200).json({message:'get user info succrssfully', data: user})
 
     } catch (error) {
         console.log('Error in get self info controller', error.message);

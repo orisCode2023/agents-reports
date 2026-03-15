@@ -13,7 +13,7 @@ async function getReportId(req, res){
               return res.status(403).json({ message: "not authorized" });
             }
           
-            return res.status(200).json({message: "fonud successfully", Report: report })
+            return res.status(200).json({message: "fonud successfully", data: report })
     } catch (error) {
         console.log('Error in get report by id controller', error.message);
         return res.status(500).json({message: 'Internal server error '});

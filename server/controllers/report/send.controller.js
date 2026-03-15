@@ -22,7 +22,7 @@ async function sendReport(req, res){
             imagePath,
             sourceType: 'manual'
         })
-        return res.status(201).json({message: 'report successfully', report: newReport})
+        return res.status(201).json({message: 'report successfully', data: newReport})
     } catch (error) {
         console.log('Error in send report controller', error.message);
         return res.status(500).json({message: 'Internal server error '});
