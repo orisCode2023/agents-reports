@@ -1,5 +1,3 @@
-import React from "react";
-
 function Table({ dataTable }) {
   if (!dataTable || dataTable.length === 0) {
     return <p>No data</p>; // or null / a spinner

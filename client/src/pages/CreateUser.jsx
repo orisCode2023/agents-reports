@@ -1,46 +1,42 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
-import { BASE_URL, ReportsResponse, User } from "../utils/defenitions";
+import { BASE_URL } from "../utils/defenitions";
 
 function CreateUser() {
   const navigate = useNavigate();
-  const [userData, setUserData] = useState ({
+  const [userData, setUserData] = useState({
     agentCode: "",
     fullName: "",
     role: "",
   });
-  const [triger, setTriger] = useState(userData);
+  
   function handleChange(e) {
     const { name, value } = e.target;
     setUserData((prevUserData) => ({ ...prevUserData, [name]: value }));
   }
 
+  async function newUser() {
+    try {
+      await fetch(BASE_URL + "/admin/users", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(userData);
-    setTriger(userData);
- }
-
-  useEffect(() => {
-    async function newUser() {
-      try {
-        const response = await fetch(BASE_URL + "/admin/users", {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userData),
-        });
-        const result = await response.json();
-        setUserData(result);
-      } catch (error) {
-        console.log(error);
-      }
-    }
     newUser();
-  }, [triger]);
-  // TODO: check if the [] is nedded
+    alert("user created succesfully");
+    navigate("/AdminDashboard");
+  }
+
   return (
     <div>
       <h2>Create New User</h2>
@@ -71,12 +67,6 @@ function CreateUser() {
         />
         <button type="submit">Create</button>
       </form>
-      <div>
-        {userData?.user &&
-          Object.entries(userData?.user).map(([key, value]) => (
-            <p key={key}>{`${key} : ${value}`}</p>
-          ))}
-      </div>
     </div>
   );
 }
